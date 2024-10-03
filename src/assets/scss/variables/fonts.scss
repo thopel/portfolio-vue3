@@ -1,0 +1,44 @@
+// ? Readex Font Face
+
+$Readex-Bold: "Readex-Bold", sans-serif;
+@include font-face(Readex-Bold, "./assets/fonts/ReadexPro-Bold");
+
+$Readex-SemiBold: "Readex-SemiBold", sans-serif;
+@include font-face(Readex-SemiBold, "./assets/fonts/ReadexPro-SemiBold");
+
+$Readex-Medium: "Readex-Medium", sans-serif;
+@include font-face(Readex-Medium, "./assets/fonts/ReadexPro-Medium");
+
+$Readex-Regular: "Readex-Regular", sans-serif;
+@include font-face(Readex-Regular, "./assets/fonts/ReadexPro-Regular");
+
+$Readex-ExtraLight: "Readex-ExtraLight", sans-serif;
+@include font-face(Readex-ExtraLight, "./assets/fonts/ReadexPro-ExtraLight");
+
+$Readex-Light: "Readex-Light", sans-serif;
+@include font-face(Readex-Light, "./assets/fonts/ReadexPro-Light");
+
+$Eugusto: "Eugusto", sans-serif;
+@include font-face(Eugusto, "./assets/fonts/Eugusto-Regular");
+
+
+// ! Font Size Desktop
+$fs-html: 9px;
+
+$fs-d-h1: 13rem;
+$fs-d-h2: 3.5rem;
+$fs-d-h3: 2.25rem;
+$fs-d-p: 1.8rem;
+$fs-d-ps: 1.6rem;
+$fs-d-menu: 1.6rem;
+$fs-d-icon: 5rem;
+
+$fs-t-h1: 13rem;
+$fs-t-h2: 3.5rem;
+$fs-t-h3: 2.25rem;
+
+$fs-m-h1: 15rem;
+$fs-t-h2: 3.5rem;
+$fs-t-h3: 2.25rem;
+$fs-m-p: 1.8rem;
+$fs-m-ps: 1.4rem;

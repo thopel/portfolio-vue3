@@ -1,0 +1,76 @@
+// * Flexbox
+@mixin flexbox($direction, $jc, $ai, $gap: null) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $jc;
+  align-items: $ai;
+  gap: $gap;
+}
+
+// ! Font Size
+@mixin font(
+  $font-size,
+  $font-family,
+  $text-transform,
+  $line-height,
+  $letter-spacing: normal
+) {
+  font-size: $font-size;
+  font-family: $font-family;
+  text-transform: $text-transform;
+  line-height: 100% * $line-height;
+  letter-spacing: $letter-spacing;
+}
+
+// ? Font Face
+@mixin font-face(
+  $font-name,
+  $path,
+  $weight: normal,
+  $style: normal,
+  $font-display: swap
+) {
+  @font-face {
+    font-family: quote($font-name);
+    src: url($path + ".eot");
+    src: url($path + ".eot?#iefix") format("embedded-opentype"),
+    url($path + ".woff2") format("woff2"),
+      url($path + ".woff") format("woff"),
+      url($path + ".ttf") format("truetype"),
+      url($path + ".svg?#svgFontName") format("svg");
+    font-weight: $weight;
+    font-style: $style;
+    font-display: $font-display;
+  }
+}
+
+// * Media Queries
+$laptop: 1440px;
+$tablet: 834px;
+$mobile: 576px;
+
+@mixin laptop {
+  @media screen and (max-width: $laptop) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (max-width: $tablet) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: $mobile) {
+    @content;
+  }
+}
+
+// ! Keyframes
+
+@mixin keyframes($animation) {
+  @keyframes #{$animation} {
+    @content;
+  }
+}
