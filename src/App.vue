@@ -4,5 +4,13 @@ import Header from "./components/Header.vue";
 
 <template>
   <Header />
-  <router-view></router-view>
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
+
+<style lang="scss" scoped>
+div {
+  flex: 1;
+}
+</style>

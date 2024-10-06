@@ -8,13 +8,7 @@
 }
 
 // ! Font Size
-@mixin font(
-  $font-size,
-  $font-family,
-  $text-transform,
-  $line-height,
-  $letter-spacing: normal
-) {
+@mixin font($font-size, $font-family, $text-transform, $line-height, $letter-spacing: normal) {
   font-size: $font-size;
   font-family: $font-family;
   text-transform: $text-transform;
@@ -23,21 +17,12 @@
 }
 
 // ? Font Face
-@mixin font-face(
-  $font-name,
-  $path,
-  $weight: normal,
-  $style: normal,
-  $font-display: swap
-) {
+@mixin font-face($font-name, $path, $weight: normal, $style: normal, $font-display: swap) {
   @font-face {
     font-family: quote($font-name);
     src: url($path + ".eot");
-    src: url($path + ".eot?#iefix") format("embedded-opentype"),
-    url($path + ".woff2") format("woff2"),
-      url($path + ".woff") format("woff"),
-      url($path + ".ttf") format("truetype"),
-      url($path + ".svg?#svgFontName") format("svg");
+    src: url($path + ".eot?#iefix") format("embedded-opentype"), url($path + ".woff2") format("woff2"), url($path + ".woff") format("woff"),
+      url($path + ".ttf") format("truetype"), url($path + ".svg?#svgFontName") format("svg");
     font-weight: $weight;
     font-style: $style;
     font-display: $font-display;
