@@ -5,13 +5,62 @@
   font-size: 10px;
 
   color-scheme: light dark;
-  color: $secondary;
-  background-color: $main;
+  color: var(--secondary-color);
+  background-color: var(--main-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.filtered-object {
+  filter: invert(12%) sepia(9%) saturate(0%) hue-rotate(232deg) brightness(93%) contrast(78%);
+}
+
+.dark-mode {
+  .filtered-object {
+    filter: invert(100%) sepia(0%) saturate(1841%) hue-rotate(168deg) brightness(124%) contrast(89%);
+  }
+}
+
+.filtered-object-inverse {
+  filter: invert(100%) sepia(0%) saturate(1841%) hue-rotate(168deg) brightness(124%) contrast(89%);
+}
+
+.dark-mode {
+  .filtered-object-inverse {
+    filter: invert(12%) sepia(9%) saturate(0%) hue-rotate(232deg) brightness(93%) contrast(78%);
+  }
+}
+
+/* ===== Scrollbar CSS ===== */
+
+* {
+  --sb-track-color: #ffffff00;
+  --sb-thumb-color: #cecece;
+  --sb-size: 5px;
+}
+
+*::-webkit-scrollbar {
+  width: var(--sb-size);
+  height: var(--sb-size);
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 25px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 25px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
 }
 
 // reset styles
@@ -33,7 +82,7 @@ a {
 body,
 #app {
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
 }

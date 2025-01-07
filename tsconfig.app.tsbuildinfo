@@ -1,0 +1,1 @@
+{"root":["./src/firebase.ts","./src/main.ts","./src/vite-env.d.ts","./src/router/index.ts","./src/app.vue","./src/components/animatedcurves.vue","./src/components/header.vue","./src/components/loader.vue","./src/components/pageloader.vue","./src/views/about.vue","./src/views/home.vue","./src/views/projects/project.vue","./src/views/projects/projects.vue"],"version":"5.6.2"}

@@ -1,11 +1,10 @@
 <template>
   <main>
     <router-link class="back" :to="{ name: 'Projects' }">Back</router-link>
-    <div v-if="!loaded || !technoLoaded" class="loader_wrapper">
-      <div class="loader"></div>
-      <p>Loading...</p>
+    <div v-if="!loaded || !technoLoaded">
+      <PageLoader />
     </div>
-    <div v-if="loaded && technoLoaded">
+    <div v-else>
       <div class="top">
         <h1>{{ projet.name }}</h1>
         <div class="tech">
@@ -21,9 +20,8 @@
             <div class="infos-content">
               <h2 class="subtitle">Information</h2>
               <h3>{{ projet.annee }} ~ {{ projet.type }}</h3>
-              <p class="descr" v-html="projet.description"></p>
-              <h2 v-if="projet.collab.length > 0" class="subtitle">Collaborators</h2>
               <div v-if="projet.collab.length > 0" class="collab">
+                <span>Featuring :</span>
                 <a
                   :title="'LinkedIn profile of ' + pers.name"
                   rel="noopener noreferrer"
@@ -34,6 +32,7 @@
                   >{{ pers.name }}</a
                 >
               </div>
+              <p class="descr" v-html="projet.description"></p>
             </div>
             <a :title="projet.name" rel="noopener noreferrer" target="_blank" v-if="projet.lien" class="link" :href="projet.lien">Have a look</a>
           </div>
@@ -62,8 +61,12 @@
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import PageLoader from "../../components/PageLoader.vue";
 
 export default {
+  components: {
+    PageLoader,
+  },
   setup() {
     const projet = ref({});
     const techno = ref([]);
@@ -111,17 +114,18 @@ export default {
 
 <style scoped lang="scss">
 main {
-  color: $main;
+  color: var(--main-color);
   letter-spacing: 1px;
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
   height: fit-content;
-  color: $secondary;
+  color: var(--secondary-color);
   padding: 1vw 12vw;
 
   @include mobile {
+    padding: 20px;
     padding-bottom: 35vw;
   }
 
@@ -137,10 +141,9 @@ main {
     h1 {
       font-family: $Eugusto;
       font-size: 9rem;
-      color: $secondary;
+      color: var(--secondary-color);
       @include mobile {
         font-size: 40px;
-        margin-bottom: 10vw;
       }
     }
 
@@ -150,7 +153,7 @@ main {
       h1 {
         font-family: $Eugusto;
         font-size: 40px;
-        color: $secondary;
+        color: var(--secondary-color);
         margin-bottom: 2vw;
         @include mobile {
           font-size: 40px;
@@ -166,15 +169,15 @@ main {
       flex-wrap: wrap;
 
       span {
-        background-color: $secondary;
-        color: #f0f0f0;
+        background-color: var(--secondary-color);
+        color: var(--main-color);
         padding: 4px 12px;
         border-radius: 5px;
         margin-top: 10px;
       }
 
       @include mobile {
-        @include flexbox(row, space-between, center, 0vw);
+        @include flexbox(row, flex-start, center, 2vw);
         font-size: 2rem;
         width: 100%;
 
@@ -200,7 +203,7 @@ main {
   }
 
   h3 {
-    margin: 1vw 0;
+    margin-bottom: 1vw;
 
     @include mobile {
       margin: 5vw 0;
@@ -220,11 +223,15 @@ main {
       margin-top: 5vw;
     }
 
+    span {
+      color: var(--main-color);
+    }
+
     a {
       margin-left: 10px;
-      color: var(--color1);
+      color: var(--main-color);
       position: relative;
-      line-height: 4rem;
+      text-decoration: underline;
 
       &:hover:after {
         transform: rotate(360deg);
@@ -254,12 +261,33 @@ main {
 
   .descr-wrapper {
     width: 100%;
-    background-color: $secondary;
-    color: $main;
+    background-color: var(--secondary-color);
+    color: var(--main-color);
     border-radius: 10px;
     padding: 2vw;
     @include flexbox(row, space-between, flex-start, 2vw);
     margin-bottom: 2vw;
+    position: relative;
+
+    @include mobile {
+      @include flexbox(column, space-between, flex-start, 2vw);
+      margin-bottom: 0;
+      padding: 5vw;
+    }
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: calc(100% + 24vw);
+      height: 100%;
+      left: -12vw;
+      z-index: -1;
+      background: url("@/assets/medias/line-5.svg") center/100% 100% no-repeat;
+
+      @include mobile {
+        display: none;
+      }
+    }
 
     & .descr-infos {
       width: 50%;
@@ -267,13 +295,12 @@ main {
       @include flexbox(column, space-between, flex-start, 2vw);
 
       @include mobile {
-        padding: 5vw;
+        width: 100%;
       }
     }
 
     @include mobile {
       width: 100%;
-      margin-bottom: 10vw;
     }
   }
 
@@ -292,23 +319,28 @@ main {
     @include mobile {
       font-size: 2rem;
       margin-top: 5vw;
+      font-size: 1.4rem;
     }
   }
 
   .link {
     font-size: 2rem;
     text-decoration: none;
-    color: $secondary;
+    color: var(--secondary-color);
     width: fit-content;
     position: relative;
     cursor: pointer;
-    background-color: $main;
+    background-color: var(--main-color);
     border-radius: 5px;
     padding: 5px;
 
     @include mobile {
-      font-size: 2rem;
-      margin-top: 7vw;
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      padding: 10px;
+      order: 1;
+      width: 100%;
+      text-align: center;
     }
   }
 
@@ -337,35 +369,27 @@ main {
     position: fixed;
     bottom: -5vw;
     right: 50%;
-    background: url("~/assets/medias/ball.svg") bottom/cover no-repeat;
+    background-color: var(--secondary-color);
     transform: translateX(51.5%);
     width: 10vw;
     height: 10vw;
     padding-bottom: 3vw;
+    border-radius: 50%;
     @include flexbox(row, center, center);
-    color: #f0f0f0;
+    color: var(--main-color);
     z-index: 9;
     font-family: $Eugusto;
-    font-size: $fs-d-h3;
+    font-size: 1.6rem;
     transition: all 0.3s ease-in-out;
-
-    &:hover {
-      height: 11vw;
-      width: 11vw;
-
-      @include mobile {
-        height: 53vw;
-        width: 53vw;
-        padding-bottom: 8vw;
-        bottom: -27vw;
-      }
-    }
+    display: none;
 
     @include mobile {
+      display: flex;
       height: 80px;
       width: 80px;
-      transform: translateX(0);
-      right: 18px;
+      transform: translateX(50%);
+      right: 50%;
+      box-shadow: 0px 0px 29px -10px var(--main-color);
       bottom: 20px;
       padding-bottom: 0;
     }
@@ -395,6 +419,7 @@ main {
 
     @include mobile {
       margin-top: 10vw;
+      gap: 20px;
     }
 
     .picture {

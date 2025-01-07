@@ -1,16 +1,21 @@
 <template>
   <main>
-    <h1>Discover my projects throught the years.</h1>
-    <div class="wrapper" v-for="(section, indexSection) in chunkArray(projets, 4)" :key="indexSection">
-      <router-link
-        v-for="(projet, index) in section"
-        :to="'projects/' + projet.slug"
-        :key="index"
-        class="card"
-        :style="'background-image: url(' + projet.banner + ');'"
-      >
-        <h2>{{ String(projet.addDate.toDate().getFullYear()) }}</h2>
-      </router-link>
+    <div v-if="!loaded">
+      <PageLoader />
+    </div>
+    <div style="width: 100%" v-else>
+      <h1>Discover my projects throught the years.</h1>
+      <div class="wrapper" v-for="(section, indexSection) in chunkArray(projets, 3)" :key="indexSection">
+        <router-link
+          v-for="(projet, index) in section"
+          :to="'projects/' + projet.slug"
+          :key="index"
+          class="card"
+          :style="'background-image: url(' + projet.banner + ');'"
+        >
+          <h2>{{ String(projet.addDate.toDate().getFullYear()) }}</h2>
+        </router-link>
+      </div>
     </div>
   </main>
 </template>
@@ -19,11 +24,11 @@
 import { ref, onMounted } from "vue";
 import { db } from "../../firebase"; // Assurez-vous que "db" est bien l'instance Firestore initialisée
 import { collection, getDocs, orderBy, query } from "firebase/firestore"; // Importation des fonctions Firestore
+import PageLoader from "../../components/PageLoader.vue";
 
 export default {
   head() {
     return {
-      titleTemplate: "Projects - %s",
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -35,6 +40,9 @@ export default {
       ],
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
     };
+  },
+  components: {
+    PageLoader,
   },
   setup() {
     const projets = ref([]); // Utilisation de ref pour la réactivité
@@ -88,10 +96,11 @@ export default {
 h1 {
   font-family: $Eugusto;
   font-size: 40px;
-  color: $secondary;
+  color: var(--secondary-color);
+  text-align: center;
   margin-bottom: 2vw;
   @include mobile {
-    font-size: 40px;
+    font-size: 30px;
     margin-bottom: 10vw;
   }
 }
@@ -101,7 +110,7 @@ main {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 20px 12vw;
+  padding: 20px 18vw;
   align-items: center;
   justify-content: center;
   // & > div {
@@ -112,7 +121,7 @@ main {
   //   height: 100%;
   // }
   @include mobile {
-    padding: 0 3.9rem;
+    padding: 0 20px;
     padding-top: 12vh;
   }
 }
@@ -127,9 +136,9 @@ main {
   &:before {
     content: "";
     position: absolute;
-    width: calc(100% + 24vw);
+    width: calc(100% + 36vw);
     height: 100%;
-    left: -12vw;
+    left: -18vw;
     z-index: -1;
 
     @include mobile {
@@ -144,9 +153,9 @@ main {
   }
   @include mobile {
     height: fit-content;
-    gap: 10vw;
+    gap: 20px;
     flex-direction: column;
-    padding-bottom: 11vw;
+    padding-bottom: 20px;
   }
   &::-webkit-scrollbar {
     display: none;
@@ -155,8 +164,8 @@ main {
 
 .card {
   transition: width 0.5s ease-in-out;
-  height: 35vw;
-  width: calc(100% / 4 - 2vw + (2vw / 4));
+  height: 38vw;
+  width: calc(100% / 3 - 2vw + (2vw / 3));
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -171,13 +180,13 @@ main {
     font-size: 80px;
     transform: translateY(40px);
     padding-top: 40px;
-    color: $main;
+    color: var(--main-color);
     width: 100%;
     text-align: center;
-    background: $secondary;
-    background: -moz-linear-gradient(180deg, rgba(240, 240, 240, 0) 0%, $secondary 100%);
-    background: -webkit-linear-gradient(180deg, rgba(240, 240, 240, 0) 0%, $secondary 100%);
-    background: linear-gradient(180deg, rgba(240, 240, 240, 0) 0%, $secondary 100%);
+    background: var(--secondary-color);
+    background: -moz-linear-gradient(180deg, rgba(240, 240, 240, 0) 0%, var(--secondary-color) 100%);
+    background: -webkit-linear-gradient(180deg, rgba(240, 240, 240, 0) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(180deg, rgba(240, 240, 240, 0) 0%, var(--secondary-color) 100%);
   }
 
   @include mobile {
