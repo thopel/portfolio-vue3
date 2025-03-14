@@ -14,6 +14,9 @@
         <router-link to="/about">about</router-link>
         <div class="selected-bg"></div>
       </nav>
+      <h2 v-if="route.params.slug && projet.name" class="text no-mobile" style="padding: 6.5px 10px; height: 100%">
+        {{ projet.name }}
+      </h2>
     </div>
 
     <div class="sections no-mobile">
@@ -33,7 +36,40 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
+import { useRoute } from "vue-router";
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+
+const route = useRoute();
+const copied = ref({
+  moving: false,
+  text: "",
+  bgColor: "var(--secondary-color)",
+});
+const emailClickedCounter = ref(0);
+const timeoutRef = ref(null);
+const email = "hello@thomaspelfrene.com";
+const projet = ref({});
+
+const getProjet = async () => {
+  if (!route.params.slug) {
+    console.warn("Slug is undefined, skipping query.");
+    return;
+  }
+
+  const db = getFirestore();
+  const q = query(collection(db, "projets"), where("slug", "==", route.params.slug));
+
+  try {
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      projet.value = doc.data();
+    });
+    console.log("Document data:", projet.value);
+  } catch (error) {
+    console.error("Error fetching project:", error);
+  }
+};
 
 // Récupérer la valeur dark-mode au montage
 onMounted(() => {
@@ -50,14 +86,16 @@ onMounted(() => {
   }
 });
 
-const copied = ref({
-  moving: false,
-  text: "",
-  bgColor: "var(--secondary-color)",
-});
-const emailClickedCounter = ref(0);
-const timeoutRef = ref(null);
-const email = "hello@thomaspelfrene.com";
+watch(
+  () => route.params.slug,
+  (newSlug) => {
+    if (newSlug) {
+      projet.value = {}; // Réinitialiser le projet avant de charger les nouvelles données
+      getProjet();
+    }
+  },
+  { immediate: true }
+);
 
 // Fonction pour inverser les couleurs
 const swapColors = () => {
@@ -149,6 +187,12 @@ h1 {
   font-size: 2.7rem;
   font-weight: 400;
   font-family: "Eugusto";
+}
+
+h2 {
+  color: var(--secondary-color);
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
 .sections {
@@ -354,6 +398,9 @@ h1 {
     & :not(.lightmode) {
       display: none;
     }
+  }
+  h2.no-mobile {
+    display: none !important;
   }
   .sections:first-child {
     margin-right: 20px;

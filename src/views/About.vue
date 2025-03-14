@@ -140,18 +140,22 @@ onMounted(async () => {
         <img src="../assets/medias/line-5.svg" alt="line" class="line" />
         <div class="tl-title">
           <h2>Job</h2>
-          <h2>Formation</h2>
+          <h2>Training</h2>
         </div>
         <div class="tl-item" v-for="(item, index) in timeline" :index="index">
-          <img v-if="item.jobSticker" :src="item.jobSticker" alt="logo de l'entreprise" class="sticker-job" />
-          <img v-if="item.formationSticker" :src="item.formationSticker" alt="logo de l'école" class="sticker-formation" />
           <div class="tl-item-title">
-            <h2 class="job-title" v-if="item.jobName">{{ item.jobName }}</h2>
+            <h2 class="job-title" v-if="item.jobName">
+              {{ item.jobName }}
+              <img v-if="item.jobSticker" :src="item.jobSticker" alt="logo de l'entreprise" class="sticker-job" />
+            </h2>
             <div class="job-title empty" v-else></div>
             <div class="year-wrapper">
               <span class="year">{{ item.year }}</span>
             </div>
-            <h2 class="formation-title" v-if="item.formationName">{{ item.formationName }}</h2>
+            <h2 class="formation-title" v-if="item.formationName">
+              {{ item.formationName }}
+              <img v-if="item.formationSticker" :src="item.formationSticker" alt="logo de l'école" class="sticker-formation" />
+            </h2>
             <div class="formation-title empty" v-else></div>
           </div>
           <div class="tl-description">
@@ -267,7 +271,7 @@ main {
 }
 h1 {
   font-family: $Eugusto;
-  font-size: 40px;
+  font-size: 2.5vw;
   color: var(--secondary-color);
   margin-bottom: 2vw;
   text-align: center;
@@ -422,22 +426,6 @@ h1 {
     margin-bottom: 100px;
     position: relative;
 
-    & .sticker-job {
-      height: 100px;
-      position: absolute;
-      top: -50px;
-      left: -30px;
-      transform: rotate(-10deg);
-    }
-
-    & .sticker-formation {
-      height: 100px;
-      position: absolute;
-      top: -50px;
-      right: -30px;
-      transform: rotate(10deg);
-    }
-
     .tl-item-title {
       @include flexbox(row, flex-start, center);
       width: 100%;
@@ -460,9 +448,19 @@ h1 {
       background-color: var(--secondary-color);
       width: 50%;
       text-align: center;
+      position: relative;
 
       &.empty {
         background-color: transparent;
+      }
+
+      & .sticker-job {
+        height: 100px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: rotate(-18deg) translate(-60%, -70%);
+        transform-origin: center center;
       }
     }
 
@@ -475,9 +473,18 @@ h1 {
       background-color: var(--secondary-color);
       width: 50%;
       text-align: center;
+      position: relative;
 
       &.empty {
         background-color: transparent;
+      }
+
+      & .sticker-formation {
+        height: 100px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: rotate(18deg) translate(70%, -70%);
       }
     }
 

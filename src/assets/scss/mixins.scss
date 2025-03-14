@@ -32,7 +32,7 @@
 // * Media Queries
 $laptop: 1440px;
 $tablet: 834px;
-$mobile: 576px;
+$mobile: 850px;
 
 @mixin laptop {
   @media screen and (max-width: $laptop) {

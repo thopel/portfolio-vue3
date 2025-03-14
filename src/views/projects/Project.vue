@@ -131,19 +131,23 @@ main {
 
   .top {
     width: 100%;
-    @include flexbox(row, flex-start, center, 2vw);
+    padding: 30px 0;
+    @include flexbox(column, flex-start, flex-start);
 
     @include mobile {
       @include flexbox(column, flex-start, flex-start);
       height: fit-content;
+      padding: 0;
     }
 
     h1 {
       font-family: $Eugusto;
-      font-size: 9rem;
+      font-size: 6vw;
       color: var(--secondary-color);
+      line-height: 6vw;
       @include mobile {
         font-size: 40px;
+        line-height: 40px;
       }
     }
 

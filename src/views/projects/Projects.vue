@@ -13,6 +13,7 @@
           class="card"
           :style="'background-image: url(' + projet.banner + ');'"
         >
+          <div class="bg-card"></div>
           <h2>{{ String(projet.addDate.toDate().getFullYear()) }}</h2>
         </router-link>
       </div>
@@ -95,7 +96,7 @@ export default {
 
 h1 {
   font-family: $Eugusto;
-  font-size: 40px;
+  font-size: 2.5vw;
   color: var(--secondary-color);
   text-align: center;
   margin-bottom: 2vw;
@@ -110,16 +111,10 @@ main {
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 20px 18vw;
+  padding: 20px 19vw;
   align-items: center;
   justify-content: center;
-  // & > div {
-  //   flex-direction: column;
-  //   align-items: center;
-  //   justify-content: center;
-  //   width: 100%;
-  //   height: 100%;
-  // }
+
   @include mobile {
     padding: 0 20px;
     padding-top: 12vh;
@@ -136,9 +131,9 @@ main {
   &:before {
     content: "";
     position: absolute;
-    width: calc(100% + 36vw);
+    width: 100vw;
     height: 100%;
-    left: -18vw;
+    left: -20vw;
     z-index: -1;
 
     @include mobile {
@@ -164,7 +159,7 @@ main {
 
 .card {
   transition: width 0.5s ease-in-out;
-  height: 38vw;
+  height: 60dvh;
   width: calc(100% / 3 - 2vw + (2vw / 3));
   background-position: center;
   background-repeat: no-repeat;
@@ -174,12 +169,13 @@ main {
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
+  will-change: width;
 
   h2 {
     font-family: $Eugusto;
-    font-size: 80px;
-    transform: translateY(40px);
-    padding-top: 40px;
+    font-size: 5vw;
+    transform: translateY(2.7vw);
+    padding-top: 2.5vw;
     color: var(--main-color);
     width: 100%;
     text-align: center;
@@ -187,6 +183,11 @@ main {
     background: -moz-linear-gradient(180deg, rgba(240, 240, 240, 0) 0%, var(--secondary-color) 100%);
     background: -webkit-linear-gradient(180deg, rgba(240, 240, 240, 0) 0%, var(--secondary-color) 100%);
     background: linear-gradient(180deg, rgba(240, 240, 240, 0) 0%, var(--secondary-color) 100%);
+
+    @include mobile {
+      font-size: 20vw;
+      transform: translateY(11vw);
+    }
   }
 
   @include mobile {

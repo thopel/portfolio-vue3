@@ -129,7 +129,7 @@ div {
 .sticker {
   position: absolute;
   // width: 200px;
-  height: 230px;
+  height: 12vw;
 
   @include mobile {
     height: 190px;

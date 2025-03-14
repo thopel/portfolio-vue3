@@ -101,7 +101,7 @@ main {
   height: 100%;
   width: 100%;
   background-color: var(--main-color);
-  padding: 1vw 6vw;
+  padding: 1vw 10vw;
   background-image: url("../assets/medias/line-5.svg");
   background-size: 100%;
   background-repeat: no-repeat;
@@ -161,6 +161,7 @@ main {
 
       &:hover {
         width: 115%;
+
         @include mobile {
           width: 100%;
         }
@@ -180,8 +181,8 @@ main {
 
         @include mobile {
           display: flex;
-          justify-content: flex-end;
-          background-image: linear-gradient(180deg, #00000000 20%, #13131383 100%);
+          justify-content: center;
+          background-image: linear-gradient(180deg, #00000000 10%, #13131383 50%);
         }
 
         &-title {
