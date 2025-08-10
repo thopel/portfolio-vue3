@@ -13,6 +13,7 @@
           class="card"
           :style="'background-image: url(' + projet.banner + ');'"
         >
+          <h3>{{ projet.type }}</h3>
           <div class="bg-card"></div>
           <h2>{{ String(projet.addDate.toDate().getFullYear()) }}</h2>
         </router-link>
@@ -170,6 +171,7 @@ main {
   justify-content: center;
   overflow: hidden;
   will-change: width;
+  position: relative;
 
   h2 {
     font-family: $Eugusto;
@@ -187,6 +189,29 @@ main {
     @include mobile {
       font-size: 20vw;
       transform: translateY(11vw);
+    }
+  }
+
+  h3 {
+    border-radius: 7px;
+    font-size: 0.6vw;
+    letter-spacing: 0.05vw;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    padding: 0.3vw 0.6vw;
+    position: absolute;
+    top: 0.3vw;
+    right: 0.3vw;
+    width: fit-content;
+    text-align: right;
+    background-color: var(--main-color);
+    z-index: 1;
+
+    @include mobile {
+      font-size: 2.6vw;
+      padding: 1.2vw 1.5vw;
+      top: 2vw;
+      right: 2vw;
     }
   }
 

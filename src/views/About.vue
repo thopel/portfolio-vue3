@@ -108,11 +108,11 @@ onMounted(async () => {
         <div class="descr-infos">
           <div class="contact">
             <span class="text">{{ email }}</span>
-            <div class="icons">
-              <a class="filtered-object-inverse" href="https://github.com/thopel" target="_blank" aria-label="GitHub">
+            <div class="icons filtered-object-inverse">
+              <a href="https://github.com/thopel" target="_blank" aria-label="GitHub">
                 <img src="@/assets/medias/github.svg" alt="GitHub" />
               </a>
-              <a class="filtered-object-inverse" href="https://linkedin.com/in/thomas-pelfrene" target="_blank" aria-label="LinkedIn">
+              <a href="https://linkedin.com/in/thomas-pelfrene" target="_blank" aria-label="LinkedIn">
                 <img src="@/assets/medias/linkedin.svg" alt="LinkedIn" />
               </a>
             </div>
@@ -318,7 +318,7 @@ h1 {
     @include flexbox(column, space-between, flex-start, 2vw);
 
     @include mobile {
-      padding: 5vw;
+      padding: 5vw 3vw;
       width: 100%;
     }
   }

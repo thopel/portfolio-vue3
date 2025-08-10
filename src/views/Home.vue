@@ -70,7 +70,7 @@ fetchData();
     <div class="wrapper">
       <a :href="settings.schoolLink" target="_blank" rel="noopener noreferrer" class="section" :style="`background-image: url(${settings.schoolPictureUrl})`">
         <div class="image">
-          <p class="image-text">Studying at</p>
+          <p class="image-text">Studied at</p>
           <p class="image-title">{{ settings.schoolName }}</p>
         </div>
       </a>
@@ -82,7 +82,7 @@ fetchData();
       </div>
       <a :href="settings.companyLink" target="_blank" rel="noopener noreferrer" class="section" :style="`background-image: url(${settings.companyPictureUrl})`">
         <div class="image">
-          <p class="image-text">Working at</p>
+          <p class="image-text">Working for</p>
           <p class="image-title">{{ settings.companyName }}</p>
         </div>
       </a>

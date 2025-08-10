@@ -373,14 +373,14 @@ main {
     position: fixed;
     bottom: -5vw;
     right: 50%;
-    background-color: var(--secondary-color);
+    background-color: var(--main-color);
     transform: translateX(51.5%);
     width: 10vw;
     height: 10vw;
     padding-bottom: 3vw;
     border-radius: 50%;
     @include flexbox(row, center, center);
-    color: var(--main-color);
+    color: var(--secondary-color);
     z-index: 9;
     font-family: $Eugusto;
     font-size: 1.6rem;
@@ -393,7 +393,7 @@ main {
       width: 80px;
       transform: translateX(50%);
       right: 50%;
-      box-shadow: 0px 0px 29px -10px var(--main-color);
+      box-shadow: 0px 0px 29px -10px var(--secondary-color);
       bottom: 20px;
       padding-bottom: 0;
     }
